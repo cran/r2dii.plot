@@ -1,7 +1,7 @@
 Package: r2dii.plot
 Title: Visualize the Climate Scenario Alignment of a Financial
         Portfolio
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Monika",
              family = "Furdyna",
@@ -33,8 +33,8 @@ License: MIT + file LICENSE
 URL: https://github.com/2DegreesInvesting/r2dii.plot
 BugReports: https://github.com/2DegreesInvesting/r2dii.plot/issues
 Depends: R (>= 3.4)
-Imports: dplyr, forcats, ggplot2, ggrepel, glue, gridExtra, lubridate,
-        magrittr, r2dii.data, rlang, scales
+Imports: dplyr, forcats, ggplot2, ggrepel, glue, lubridate, magrittr,
+        r2dii.data, rlang, scales
 Suggests: covr, r2dii.analysis, r2dii.match, rmarkdown, spelling,
         testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -43,7 +43,7 @@ Language: en-US
 LazyData: true
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-06-18 15:46:55 UTC; mauro
+Packaged: 2021-06-29 14:48:23 UTC; monikafurdyna
 Author: Monika Furdyna [aut, ctr, cre]
     (<https://orcid.org/0000-0002-3728-0646>),
   Mauro Lepore [aut, ctr] (<https://orcid.org/0000-0002-1986-7988>),
@@ -51,4 +51,4 @@ Author: Monika Furdyna [aut, ctr, cre]
   2 Degrees Investing Initiative [cph, fnd]
 Maintainer: Monika Furdyna <monika.furdyna@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-06-21 07:40:02 UTC
+Date/Publication: 2021-06-29 15:00:02 UTC
