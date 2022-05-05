@@ -8,7 +8,9 @@ plot_trajectory(
   data,
   span_5yr = FALSE,
   convert_label = identity,
-  center_y = FALSE
+  center_y = FALSE,
+  value_col = "percentage_of_initial_production_by_scope",
+  perc_y_scale = FALSE
 )
 }
 \arguments{
@@ -29,12 +31,19 @@ y-axis labels. For example:
 \itemize{
 \item To convert labels to uppercase use \code{convert_label = toupper}.
 \item To get the default behavior of \code{qplot_trajectory()} use
-\code{convert_label = format_metric}.
+\code{convert_label = recode_metric_trajectory}.
 }}
 
 \item{center_y}{Logical. Use \code{TRUE} to center the y-axis around start value
 (the default behavior of \code{qplot_trajectory()}), or use \code{FALSE} to not
 center.}
+
+\item{value_col}{Character. Name of the column to be used as a value to be
+plotted.}
+
+\item{perc_y_scale}{Logical. \code{FALSE} defaults to using no label conversion.
+Use \code{TRUE} to convert labels on y-axis to percentage using
+\code{scales::percent} (the default behavior of \code{qplot_trajectory()}).}
 }
 \value{
 An object of class "ggplot".
@@ -58,7 +67,10 @@ plot_trajectory(data)
 plot_trajectory(
   data,
   span_5yr = TRUE,
-  convert_label = format_metric
+  convert_label = recode_metric_trajectory,
+  center_y = TRUE,
+  value_col = "percentage_of_initial_production_by_scope",
+  perc_y_scale = TRUE
 )
 }
 \seealso{

@@ -1,3 +1,5 @@
+options(warn = -1)
+
 test_that("if `data` is not a data frame errors gracefully", {
   expect_snapshot_error(plot_emission_intensity(1))
 })
@@ -29,21 +31,18 @@ test_that("outputs an object with no factor-columns derived from `specs`", {
 })
 
 test_that("doesn't output pretty labels", {
-  data <- filter(sda, sector == "automotive")
+  data <- filter(sda, sector == "cement")
   p <- plot_emission_intensity(data)
 
   metrics <- unique(p$data$label)
-  ugly <- c("projected", "corporate_economy")
+  ugly <- c("projected", "corporate_economy", "target_demo", "adjusted_scenario_demo")
   expect_equal(metrics, ugly)
 })
 
 test_that("with too many lines to plot errors gracefully", {
   data <- filter(sda, sector == "cement") %>%
     bind_fake_sda_metrics(8)
-  # TODO: Why this warning?
-  suppressWarnings(
-    expect_snapshot_error(plot_emission_intensity(data))
-  )
+  expect_snapshot_error(plot_emission_intensity(data))
 })
 
 test_that("is sensitive to `convert_label`", {
@@ -66,4 +65,24 @@ test_that("is sensitive to `span_5yr`", {
 
   p_t <- plot_emission_intensity(data, span_5yr = TRUE)
   expect_true(diff(year_range(p_t)) == 5)
+})
+
+test_that("with n metrics in input outputs n lines", {
+  data <- filter(sda, sector == "cement", year >= 2020, region == "global")
+  n_metrics <- length(unique(data$emission_factor_metric))
+
+  n_labels <- plot_emission_intensity(data) %>%
+    unique_plot_data("label") %>%
+    length()
+
+  expect_equal(n_metrics, n_labels)
+})
+
+options(warn = 0)
+
+test_that("throws expected warning about API change",{
+  data <- head(filter(sda, sector == "cement"))
+  expect_snapshot_error(
+    plot_emission_intensity(data), class = "warning"
+    )
 })

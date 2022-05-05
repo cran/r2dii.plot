@@ -17,13 +17,18 @@ test_that("outputs like r2dii.analysis::target_sda()", {
   sort_df <- function(data) data[sort(names(data))]
 
   # Pick small data for speed. "package::f()" is to emphasize integration
-  loanbook <- r2dii.data::loanbook_demo[125:150, ]
-  ald <- filter(r2dii.data::ald_demo[1:100, ], !is.na(.data$emission_factor))
+  loanbook <- r2dii.data::loanbook_demo
+  ald <- filter(r2dii.data::ald_demo, !is.na(.data$emission_factor))
   scenario <- r2dii.data::co2_intensity_scenario_demo
+  region_isos <- r2dii.data::region_isos_demo
 
   expected <- r2dii.match::match_name(loanbook, ald) %>%
     r2dii.match::prioritize() %>%
-    r2dii.analysis::target_sda(ald, co2_intensity_scenario = scenario) %>%
+    r2dii.analysis::target_sda(
+      ald,
+      co2_intensity_scenario = scenario,
+      region_isos = region_isos
+    ) %>%
     sort_df() %>%
     vapply(typeof, character(1))
   actual <- sda %>%

@@ -1,7 +1,7 @@
 Package: r2dii.plot
 Title: Visualize the Climate Scenario Alignment of a Financial
         Portfolio
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Monika",
              family = "Furdyna",
@@ -29,11 +29,12 @@ Description: Create plots to visualize the alignment of a corporate
     Financial institutions use 'PACTA' to study how their capital
     allocation decisions align with climate change mitigation goals.
 License: MIT + file LICENSE
-URL: https://github.com/2DegreesInvesting/r2dii.plot
+URL: https://github.com/2DegreesInvesting/r2dii.plot,
+        https://2degreesinvesting.github.io/r2dii.plot/
 BugReports: https://github.com/2DegreesInvesting/r2dii.plot/issues
 Depends: R (>= 3.4)
 Imports: dplyr, forcats, ggplot2, ggrepel, glue, magrittr, r2dii.data,
-        rlang, scales
+        rlang, stringr, scales, lifecycle
 Suggests: covr, r2dii.analysis, r2dii.match, rmarkdown, spelling,
         testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -42,7 +43,7 @@ Language: en-US
 LazyData: true
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2021-10-15 21:31:04 UTC; mauro
+Packaged: 2022-05-05 16:55:16 UTC; monikafurdyna
 Author: Monika Furdyna [aut, ctr, cre]
     (<https://orcid.org/0000-0002-3728-0646>),
   Mauro Lepore [aut, ctr] (<https://orcid.org/0000-0002-1986-7988>),
@@ -50,4 +51,4 @@ Author: Monika Furdyna [aut, ctr, cre]
   2 Degrees Investing Initiative [cph, fnd]
 Maintainer: Monika Furdyna <monika.furdyna@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-10-16 04:10:02 UTC
+Date/Publication: 2022-05-05 23:20:10 UTC

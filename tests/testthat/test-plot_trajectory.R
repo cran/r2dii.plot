@@ -1,3 +1,5 @@
+options(warn = -1)
+
 test_that("isn't restricted to plotting only 5 years", {
   data <- example_market_share()
   expect_true(diff(range(data$year)) > 5L)
@@ -115,4 +117,91 @@ test_that("x-axis plots year-breaks as integers (i.e. round numbers, with no-dec
   x_axis_breaks <- g$layout$panel_params[[1]]$x$minor_breaks
 
   expect_true(all(x_axis_breaks - floor(x_axis_breaks) == 0))
+})
+
+test_that("is sensitive to `value_col`", {
+  data <- example_market_share() %>%
+    mutate(
+      different_value = .data$percentage_of_initial_production_by_scope
+    )
+
+  expect_snapshot_output(plot_trajectory(data, value_col = "different_value"))
+})
+
+test_that("is sensitive to `perc_y_scale`", {
+  data <- example_market_share()
+
+  p <- plot_trajectory(data, perc_y_scale = TRUE)
+  expected <- c("0%", "1%", "2%", "3%", "4%")
+  actual <- ggplot_build(p)$layout$panel_params[[1]]$y$get_labels()
+  expect_equal(actual, expected)
+
+  p_no_percent <- plot_trajectory(data, perc_y_scale = FALSE)
+  expected <- c("0.00", "0.01", "0.02", "0.03", "0.04")
+  actual <- ggplot_build(p_no_percent)$layout$panel_params[[1]]$y$get_labels()
+  expect_equal(actual, expected)
+})
+
+test_that("by default doesn't convert y-axis scale to percentage", {
+  data <- example_market_share()
+
+  p <- plot_trajectory(data)
+
+  expected <- c("0.00", "0.01", "0.02", "0.03", "0.04")
+  actual <- ggplot_build(p)$layout$panel_params[[1]]$y$get_labels()
+
+  expect_equal(actual, expected)
+})
+
+test_that("with bad `perc_y_scale` errors gracefully", {
+  data <- example_market_share()
+  expect_snapshot_error(plot_trajectory(data, perc_y_scale = "bad"))
+})
+
+test_that("with 0 as extreme value plots areas correctly", {
+  data <- market_share %>%
+    filter(
+      sector == "power",
+      technology == "oilcap",
+      region == "global",
+      scenario_source == "demo_2020"
+    )  %>%
+    mutate(
+      percentage_of_initial_production_by_scope = if_else(
+        percentage_of_initial_production_by_scope >= 0,
+        0,
+        percentage_of_initial_production_by_scope
+      )
+    )
+
+  p <- plot_trajectory(data)
+
+  expect_true(min(p$data$value_low) <= min(p$data$value))
+
+  data <- market_share %>%
+    filter(
+      sector == "power",
+      technology == "renewablescap",
+      region == "global",
+      scenario_source == "demo_2020"
+    )  %>%
+    mutate(
+      percentage_of_initial_production_by_scope = if_else(
+        percentage_of_initial_production_by_scope <= 0,
+        0,
+        percentage_of_initial_production_by_scope
+      )
+    )
+
+  p <- plot_trajectory(data)
+
+  expect_true(max(p$data$value_high) >= max(p$data$value))
+})
+
+options(warn = 0)
+
+test_that("throws expected warning about API change",{
+  expect_snapshot_error(
+    plot_trajectory(example_market_share()), class = "warning"
+    )
 })

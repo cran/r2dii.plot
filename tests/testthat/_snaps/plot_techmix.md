@@ -1,8 +1,11 @@
 # without `market_share` data errors gracefully
 
     `data` must have all the expected names.
-    x Missing names: metric, region, scenario_source, technology, technology_share.
+    x Missing names: metric, technology, technology_share.
     i Is your data `market_share`-like?
+    Caused by error in `abort_if_missing_names()`:
+    ! `data` must have all the expected names.
+    x Missing names: metric, technology, technology_share.
 
 # with zero-row data errors gracefully
 
@@ -42,7 +45,18 @@
 
     Code
       invisible(plot_techmix(mydata))
-    Message <message>
+    Message <rlang_message>
       The `technology_share` values are plotted for extreme years.
       Do you want to plot different years? E.g. filter mydata with:`subset(mydata, year %in% c(2020, 2030))`.
+
+# with no scenario for start year of 'projected' doesn't plot scenario bar
+
+    
+
+# throws expected warning about API change
+
+    The `data` argument of `plot_techmix()` must be prepped already as of r2dii.plot 0.4.0.
+    * From the next release you will need to call `r2dii.plot::plot_techmix(data)`
+    prior to calling `r2dii.plot::plot_techmix()`.
+    * Alternatively custom data preparation will also become possible.
 

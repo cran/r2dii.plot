@@ -1,3 +1,5 @@
+options(warn = -1)
+
 test_that("without a `data` frame errors gracefully", {
   expect_error(plot_techmix(1), "data.frame.*not")
 })
@@ -44,7 +46,7 @@ test_that("with too few scenarios errors gracefully", {
 })
 
 test_that("outputs a ggplot", {
-  data <- head(market_share, 3)
+  data <- example_tech_mix()
   p <- plot_techmix(data)
   expect_s3_class(p, "ggplot")
 })
@@ -144,8 +146,8 @@ test_that("Does not output pretty labels", {
   )
   p <- plot_techmix(data)
 
-  metrics <- unique(p$data$label)
-  ugly <- c("projected", "corporate_economy", "target_sds")
+  metrics <- sort(unique(p$data$label))
+  ugly <- sort(c("projected", "target_sds", "corporate_economy"))
   expect_equal(metrics, ugly)
 })
 
@@ -173,7 +175,7 @@ test_that("Doesn't output pretty legend labels", {
   p <- plot_techmix(data)
 
   metrics <- unique(p$data$label_tech)
-  ugly <- c("electric", "hybrid", "ice")
+  ugly <- c("electric", "hybrid", "ice", "fuelcell")
   expect_equal(metrics, ugly)
 })
 
@@ -212,6 +214,7 @@ test_that("With random order of data ouputs plot with labels in the right order"
   p <- plot_techmix(data)
 
   right_order <- c("target_sds", "corporate_economy", "projected")
+  names(right_order) <- right_order
   expect_equal(p$plot_env$labels, right_order)
 })
 
@@ -267,4 +270,30 @@ test_that("is sensitive to `convert_tech_label`", {
     unique_plot_data("label_tech")
 
   expect_false(identical(labels_def, labels_mod))
+})
+
+test_that("with no scenario for start year of 'projected' doesn't plot scenario bar", {
+  data <- market_share %>%
+    filter(
+      year %in% c(2020, 2025),
+      scenario_source == "demo_2020",
+      sector == "power",
+      region == "global",
+      metric %in% c("projected", "corporate_economy", "target_sds")
+    )
+
+  data_no_scenario_start_year <- data %>%
+    filter(
+      !((metric == "target_sds") & (year == 2020))
+    )
+
+  expect_snapshot_output(plot_techmix(data_no_scenario_start_year))
+})
+
+options(warn = 0)
+
+test_that("throws expected warning about API change",{
+  expect_snapshot_error(
+    plot_techmix(example_tech_mix()), class = "warning"
+    )
 })
