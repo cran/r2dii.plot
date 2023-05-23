@@ -49,9 +49,9 @@ plot_techmix <- function(data,
                          convert_label = identity,
                          convert_tech_label = identity) {
   lifecycle::deprecate_soft(
-      when = "0.4.0",
-      what = "plot_techmix(data = 'must be prepped already')",
-      details = api_warning_details("plot_techmix")
+    when = "0.4.0",
+    what = "plot_techmix(data = 'must be prepped already')",
+    details = api_warning_details("plot_techmix")
   )
   env <- list(data = substitute(data))
   check_plot_techmix(data, env = env)
@@ -216,7 +216,7 @@ get_technology_colours <- function(data) {
   colours <- semi_join(technology_colours, data, by = c("sector", "technology")) %>%
     left_join(
       data %>%
-        select(.data$technology, .data$label_tech) %>%
+        select("technology", "label_tech") %>%
         unique(),
       by = "technology"
     )
