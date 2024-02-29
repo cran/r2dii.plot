@@ -236,7 +236,25 @@ add_label_if_missing <- function(data) {
 prep_common <- function(data) {
   data %>%
     drop_before_projected_start_year() %>%
-    add_label_if_missing()
+    add_label_if_missing() %>%
+    factor_label_if_factored_metric()
+}
+
+factor_label_if_factored_metric <- function(data) {
+  if (is.factor(data[[metric(data)]])) {
+
+    arranged_factors <- arrange(
+      unique(data[c(metric(data), "label")])
+    )
+
+    data$label <- factor(
+      data$label,
+      levels = arranged_factors$label,
+      ordered = TRUE
+    )
+  }
+
+  data
 }
 
 abort_if_unknown_values <- function(value, data, column) {
@@ -282,10 +300,38 @@ integer_breaks <- function(n = 5, ...) {
   return(fxn)
 }
 
-api_warning_details <- function(function_name) {
+api_warning_details <- function(prep_fn_name, plot_fn_name) {
   c(
-    glue("From the next release you will need to call `r2dii.plot::{function_name}(data)`
-             prior to calling `r2dii.plot::{function_name}()`."),
+    glue("From the next release you will need to call `r2dii.plot::{prep_fn_name}(data)`
+             prior to calling `r2dii.plot::{plot_fn_name}()`."),
     "Alternatively custom data preparation will also become possible."
   )
+}
+
+get_ordered_scenarios <- function(data) {
+  ordered_scenarios <- data %>%
+    filter(is_scenario(.data$metric), .data$year == max(data$year)) %>%
+    arrange(desc(.data$value)) %>%
+    pull(.data$metric) %>%
+    as.character()
+
+  ordered_scenarios
+}
+
+extract_scenarios <- function(x) {
+  unique(x[startsWith(x, "target_")])
+}
+
+abort_if_metric_has_no_projected <- function(data) {
+  if (!any(data[["metric"]] %in% "projected")) {
+    abort(
+      message = c(
+        "The column `metric` has no value 'projected' .",
+        i = "Did you accidentally filter out the 'projected' values?"
+      ),
+      class = "no_projected"
+    )
+  }
+
+  invisible(data)
 }
