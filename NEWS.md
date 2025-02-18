@@ -1,3 +1,7 @@
+# r2dii.plot 0.5.1
+
+ * add definitions to `data_dictionary` (#597)
+
 # r2dii.plot 0.5.0
 
 ## New features

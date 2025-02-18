@@ -1,7 +1,7 @@
-62a7acf2c04374c87b8f7479c1bcb649 *DESCRIPTION
+ed3e53699f10e5d5d617cd45d4cb96df *DESCRIPTION
 05c44c9259e0ccc527be39401c2035d5 *LICENSE
 0611f62775d1740f9a285853ee6e7e5f *NAMESPACE
-a8e94e1f9bb1849fd649dee11c044c57 *NEWS.md
+81d42142440ad45d48d0b6866e2544e8 *NEWS.md
 67b71e456e282836bd15915285616a46 *R/data_dictionary.R
 6d5a0be6733b821a918b9986b40d5df4 *R/imports.R
 b2516804587695944112b0abf945b744 *R/market_share.R
@@ -10,7 +10,7 @@ d112b039a8961ccaa6642f2ca30c78d5 *R/plot_techmix.R
 5a80be0e831ead99520d36496a37220b *R/plot_trajectory.R
 da02f9200e803f1cb775e6afcb2e444d *R/prep_emission_intensity.R
 4bcb56cc05a13b6040e01514a659c739 *R/prep_techmix.R
-3acb543a0cf579c1902c201b43e037bd *R/prep_trajectory.R
+3337a5f81049e798695a33903b84ae83 *R/prep_trajectory.R
 689098d657fc93c2f8b246877eba8919 *R/qplot_emission_intensity.R
 ff80ecae23dc61928f038a4556e5f72e *R/qplot_techmix.R
 30eec11fcbde4d9d13c77582f687d365 *R/qplot_trajectory.R
@@ -27,7 +27,7 @@ a0ebd9793f0d8e7db01e6ef41c6b9f7a *R/r2dii_colours.R
 ac14193ed7f4c7beacfde88106ec5127 *R/utils-tests.R
 79d30fc5dd6b4d64b46ba701b78f003d *R/utils.R
 32d4fd284195850a39bc8fd5ad628e56 *README.md
-6312c2cefd142c599cf844acbb566e18 *data/data_dictionary.rda
+72cee57b483c6cb7e0817f6f2fd1e61c *data/data_dictionary.rda
 e0109493d119d9c3217567d9d8b0fc46 *data/market_share.rda
 6aad4c629133ff4a12a5141234e5066e *data/palette_colours.rda
 3a58fd5d71df2393ee3d2af59186cf66 *data/scenario_colours.rda
@@ -46,7 +46,7 @@ ab1670b9a1102fe1fb677f5456175fe3 *man/plot_techmix.Rd
 110ce1070ec9eb47922894b15428356c *man/plot_trajectory.Rd
 fc7b26c890e1fd31ffa4e5bc6691ac15 *man/prep_emission_intensity.Rd
 9201167d85bc94dc807f627ac16a17bd *man/prep_techmix.Rd
-e6aa597004102c3af54d508442f3b2f6 *man/prep_trajectory.Rd
+049ef6bcf7b28a3b5f74a7e7ee97ab7d *man/prep_trajectory.Rd
 121fc99d3b9f59a8bb42f9a9e6a214c6 *man/qplot_emission_intensity.Rd
 563045338cde3e12dcad08a6a1b26b18 *man/qplot_techmix.Rd
 a397db79f3079f4fe4749536d310ea3c *man/qplot_trajectory.Rd
@@ -75,6 +75,7 @@ a4a21198a5a7a8ac8973dfb55a059abc *tests/testthat/_snaps/scale_colour_r2dii_secto
 8fcadd18bf2c04faa3eaf0082b626d7e *tests/testthat/_snaps/scale_colour_r2dii_tech.md
 d8ffff59f77dca0b8628c753cf17afd2 *tests/testthat/_snaps/sda.md
 b74fc3ba446e3defc69a4562fbd30792 *tests/testthat/setup.R
+5f5353a206cc33095b1728ab04663182 *tests/testthat/test-data_dictionary.R
 ce15b4dfde68840021724d2b381f1987 *tests/testthat/test-market_share.R
 65884f63182355bfc38d331421313cf0 *tests/testthat/test-plot_emission_intensity.R
 0147dad8d8c7337e83027a6d70d767ab *tests/testthat/test-plot_techmix.R
