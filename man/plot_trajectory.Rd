@@ -29,13 +29,13 @@ Create a trajectory plot
 \examples{
 # plot with `qplot_trajectory()` parameters
 data <- subset(
-  market_share,
+  market_share_demo,
   sector == "power" &
     technology == "renewablescap" &
     region == "global" &
     scenario_source == "demo_2020"
-) \%>\%
-  prep_trajectory()
+)
+data <- prep_trajectory(data)
 
 plot_trajectory(
   data,
@@ -44,5 +44,5 @@ plot_trajectory(
 )
 }
 \seealso{
-\link{market_share}.
+\link{market_share_demo}.
 }

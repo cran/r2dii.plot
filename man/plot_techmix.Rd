@@ -18,20 +18,21 @@ Create a techmix plot
 \examples{
 # plot with `qplot_techmix()` parameters
 data <- subset(
-  market_share,
+  market_share_demo,
   scenario_source == "demo_2020" &
     sector == "power" &
     region == "global" &
     metric \%in\% c("projected", "corporate_economy", "target_sds")
-) \%>\%
-  prep_techmix(
-    span_5yr = TRUE,
-    convert_label = recode_metric_techmix,
-    convert_tech_label = spell_out_technology
-  )
+)
+data <- prep_techmix(
+  data,
+  span_5yr = TRUE,
+  convert_label = recode_metric_techmix,
+  convert_tech_label = spell_out_technology
+)
 
 plot_techmix(data)
 }
 \seealso{
-\link{market_share}.
+\link{market_share_demo}.
 }

@@ -9,7 +9,7 @@
 #'   Use `TRUE` to convert labels on y-axis to percentage using
 #'   `scales::percent` (the default behavior of `qplot_trajectory()`).
 #'
-#' @seealso [market_share].
+#' @seealso [market_share_demo].
 #'
 #' @return An object of class "ggplot".
 #'
@@ -17,13 +17,13 @@
 #' @examples
 #' # plot with `qplot_trajectory()` parameters
 #' data <- subset(
-#'   market_share,
+#'   market_share_demo,
 #'   sector == "power" &
 #'     technology == "renewablescap" &
 #'     region == "global" &
 #'     scenario_source == "demo_2020"
-#' ) %>%
-#'   prep_trajectory()
+#' )
+#' data <- prep_trajectory(data)
 #'
 #' plot_trajectory(
 #'   data,
@@ -143,13 +143,13 @@ scenario <- function(data, center_y = FALSE) {
     data_scenarios <- data_scenarios %>%
       group_by(.data$year, .data$technology, .data$sector) %>%
       mutate(metric = factor(.data$metric,
-                             levels = rev(get_ordered_scenarios(data_scenarios))
+        levels = rev(get_ordered_scenarios(data_scenarios))
       )) %>%
       arrange(.data$year, .data$metric) %>%
       rename(value_low = "value") %>%
       mutate(value = lead(.data$value_low,
-                          n = 1,
-                          default = area_borders$upper
+        n = 1,
+        default = area_borders$upper
       ))
   } else {
     data_worse_than_scenarios$value <- area_borders$upper
@@ -220,7 +220,7 @@ start_value_portfolio <- function(data) {
 check_plot_trajectory <- function(data, env) {
   stopifnot(is.data.frame(data))
   crucial <- c(common_crucial_market_share_columns(), "label")
-  hint_if_missing_names(abort_if_missing_names(data, crucial), "market_share")
+  hint_if_missing_names(abort_if_missing_names(data, crucial), "market_share_demo")
   abort_if_has_zero_rows(data, env = env)
   enforce_single_value <- c("sector", "technology", "region", "scenario_source")
   abort_if_multiple(data, enforce_single_value, env = env)
@@ -347,10 +347,10 @@ get_ordered_scenario_colours <- function(n) {
   pick <- function(cols) filter(scenario_colours, .data$label %in% cols)
 
   switch(as.character(n),
-         "2" = pick(c("light_green", "red")),
-         "3" = pick(c("light_green", "light_yellow", "red")),
-         "4" = pick(c("light_green", "dark_yellow", "light_yellow", "red")),
-         "5" = scenario_colours,
-         abort(c("`n` must be between 2 and 5.", x = glue("Provided: {n}."))) # nocov
+    "2" = pick(c("light_green", "red")),
+    "3" = pick(c("light_green", "light_yellow", "red")),
+    "4" = pick(c("light_green", "dark_yellow", "light_yellow", "red")),
+    "5" = scenario_colours,
+    abort(c("`n` must be between 2 and 5.", x = glue("Provided: {n}."))) # nocov
   )
 }

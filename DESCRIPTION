@@ -1,7 +1,7 @@
 Package: r2dii.plot
 Title: Visualize the Climate Scenario Alignment of a Financial
         Portfolio
-Version: 0.5.1
+Version: 0.5.2
 Authors@R: 
     c(person(given = "Monika",
              family = "Furdyna",
@@ -33,8 +33,8 @@ URL: https://rmi-pacta.github.io/r2dii.plot/,
         https://github.com/RMI-PACTA/r2dii.plot
 BugReports: https://github.com/RMI-PACTA/r2dii.plot/issues
 Depends: R (>= 3.5)
-Imports: dplyr, ggplot2, ggrepel, glue, magrittr, r2dii.data, rlang,
-        stringr, scales
+Imports: dplyr, ggplot2, ggrepel, glue, r2dii.data, rlang, stringr,
+        scales
 Suggests: cli, covr, r2dii.analysis, r2dii.match, readr, rmarkdown,
         spelling, testthat (>= 3.0.0), waldo
 Config/testthat/edition: 3
@@ -44,12 +44,14 @@ Language: en-US
 LazyData: true
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2025-02-18 14:37:04 UTC; jkastl
-Author: Monika Furdyna [aut, ctr, cre]
-    (<https://orcid.org/0000-0002-3728-0646>),
-  Mauro Lepore [aut, ctr] (<https://orcid.org/0000-0002-1986-7988>),
-  Alex Axthelm [aut, ctr] (<https://orcid.org/0000-0001-8579-8565>),
+Packaged: 2025-06-17 13:54:41 UTC; cjrmi
+Author: Monika Furdyna [aut, ctr, cre] (ORCID:
+    <https://orcid.org/0000-0002-3728-0646>),
+  Mauro Lepore [aut, ctr] (ORCID:
+    <https://orcid.org/0000-0002-1986-7988>),
+  Alex Axthelm [aut, ctr] (ORCID:
+    <https://orcid.org/0000-0001-8579-8565>),
   RMI [cph, fnd]
 Maintainer: Monika Furdyna <monika.furdyna@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-02-18 23:50:02 UTC
+Date/Publication: 2025-06-21 13:30:02 UTC

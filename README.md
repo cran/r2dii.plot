@@ -14,7 +14,7 @@ status](https://www.r-pkg.org/badges/version/r2dii.plot)](https://CRAN.R-project
 [![R-CMD-check](https://github.com/RMI-PACTA/r2dii.plot/actions/workflows/R.yml/badge.svg)](https://github.com/RMI-PACTA/r2dii.plot/actions/workflows/R.yml)
 <!-- badges: end -->
 
-The goal of r2dii.plot is to help you plot 2DII data in an informative,
+The goal of r2dii.plot is to help you plot PACTA data in an informative,
 beautiful, and easy way.
 
 ## Installation
@@ -56,7 +56,7 @@ library(r2dii.plot)
 
 ``` r
 # `data` must meet documented "Requirements"
-data <- market_share %>%
+data <- market_share_demo %>%
   filter(
     sector == "power",
     technology == "renewablescap",
@@ -73,7 +73,7 @@ qplot_trajectory(data)
   by modifying the input data and applying `ggplot2` functions.
 
 ``` r
-data <- market_share %>%
+data <- market_share_demo %>%
   filter(
     sector == "power",
     technology == "renewablescap",
